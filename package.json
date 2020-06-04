@@ -1,7 +1,17 @@
 {
   "name": "@toolbuilder/dynamic-ring-buffer",
-  "version": "0.1.0-rc0",
-  "keywords": [],
+  "version": "0.1.0",
+  "keywords": [
+    "ring buffer",
+    "allocation",
+    "circular queue",
+    "buffer",
+    "iterable",
+    "esm",
+    "ES2015",
+    "module",
+    "bundles"
+  ],
   "license": "MIT",
   "main": "index.js",
   "module": "src/index.js",
@@ -18,17 +28,16 @@
   },
   "dependencies": {
     "@toolbuilder/list": "^1.0.0",
-    "@toolbuilder/ring-buffer": "^1.0.1",
+    "@toolbuilder/ring-buffer": "^1.1.0",
     "esm": "^3.2.25"
   },
   "devDependencies": {
-    "@toolbuilder/eslint-config": ">=0.1.2",
+    "@toolbuilder/eslint-config": "^0.1.2",
     "@toolbuilder/ring-buffer-tests": "github:toolbuilder/ring-buffer-tests",
     "dequal": "^1.0.0",
-    "eslint": ">=6.8.0",
-    "iterablefu": "^0.4.1",
+    "eslint": "^7.1.0",
     "npm-run-all": "^4.1.5",
-    "tape": "^5.0.0",
-    "zora": "^3.1.8"
+    "tape": "^5.0.1",
+    "zora": "^3.1.9"
   }
 }
