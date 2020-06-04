@@ -10,6 +10,16 @@ test('test ring buffer interface', assert => {
   assert.deepEqual(actual, expected, 'ring buffer passed test')
 })
 
+test('test clear', assert => {
+  const ringbuffer = new DynamicRingBuffer(3, 100)
+  for (let i = 0; i < 100; ++i) {
+    ringbuffer.push(i)
+  }
+  ringbuffer.clear()
+  assert.deepEqual(ringbuffer.length, 0, 'ring buffer length cleared correctly')
+  assert.deepEqual(ringbuffer._buffers.length, 0, 'ring buffer chunks removed')
+})
+
 class ChunkError extends Error {
   constructor (actual, expected, message) {
     super(message)

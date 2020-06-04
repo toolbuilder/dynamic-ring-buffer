@@ -32,6 +32,7 @@ export class DynamicRingBuffer {
    */
   clear () {
     this._buffers = List.from()
+    this.length = 0
   }
 
   /**
