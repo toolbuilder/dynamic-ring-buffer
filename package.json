@@ -1,6 +1,6 @@
 {
   "name": "@toolbuilder/dynamic-ring-buffer",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "A ring buffer that manages memory in chunks to support large capacity for data bursts with low overhead when small.",
   "keywords": [
     "ring buffer",
