@@ -1,7 +1,7 @@
 import { test } from 'zora'
-import { DynamicRingBuffer } from '../src/dynamic-ring-buffer'
+import { DynamicRingBuffer } from '../src/dynamic-ring-buffer.js'
 import { RingBufferDriver } from '@toolbuilder/ring-buffer-tests'
-import dequal from 'dequal'
+import { dequal } from 'dequal'
 
 test('test ring buffer interface', assert => {
   const driver = new RingBufferDriver() // taking default options

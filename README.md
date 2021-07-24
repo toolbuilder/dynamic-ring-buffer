@@ -8,8 +8,8 @@ There are lots of ring buffer implementations on NPM. This implementation:
 
 * Dynamically allocates and deallocates in chunks to reduce memory use when not needed.
 * Drop in replacement for `Array` to convert a buffer to a ring buffer.
-* Provides `module` property in `package.json` pointing to the ES module for bundlers.
-* Requires no compiler since it uses [esm](https://github.com/standard-things/esm) to provide the NPM module.
+* Defines `exports` and `module` properties in `package.json` pointing to the ES source for bundlers.
+* Dual module that provides both ES and CommonJS entry points.
 * Provides `Symbol.iterator` generator.
 
 ## Installation
@@ -47,8 +47,18 @@ There are **lots** of alternatives on npm.
 
 Contributions are welcome. Please create a pull request.
 
-I use [pnpm](https://pnpm.js.org/) instead of npm, which is why `pnpm-lock.yaml` exists in the git repo.
+* I use [pnpm](https://pnpm.js.org/) instead of npm.
+* Run the unit tests with `pnpm test`
+* Package verification requires [pnpm](https://pnpm.io/) to be installed globally.
+  * `npm install -g pnpm`
+  * `pnpm install`
+  * `pnpm run check:packfile` to test against Node ES and CommonJS projects, as well as Electron.
+  * `pnpm run check` to validate the package is ready for commit
 
 ## Issues
 
 This project uses Github issues.
+
+## License
+
+MIT
