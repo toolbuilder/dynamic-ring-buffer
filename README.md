@@ -4,6 +4,13 @@ DynamicRingBuffer implements classic fixed length ring buffer, or circular queue
 
 When the buffer length reaches capacity, the oldest values are quietly thrown away. The methods match the Array signature for push, pop, unshift, and shift. For buffer operation either use push/shift together, or unshift/pop together.
 
+`DynamicRingBuffer` is a minimal implementation developed for use with [Await-For-It](https://github.com/toolbuilder/await-for-it) iterable queues.
+
+There are two related buffers:
+
+* [RingBuffer](https://github.com/toolbuilder/ring-buffer) ring buffer with fixed maximum size - faster than Array as a buffer.
+* [PriorityBuffer](https://github.com/toolbuilder/priority-buffer) that uses your comparator to buffer items in priority order.
+
 There are lots of ring buffer implementations on NPM. This implementation:
 
 * Dynamically allocates and deallocates in chunks to reduce memory use when not needed.
@@ -33,9 +40,9 @@ log(ringBuffer.length) // prints 0
 log(ringBuffer.length) // prints 3
 log(ringBuffer.front()) // prints 'A'
 log(ringBuffer.back()) // prints 'C'
-log(ringBuffer.shift()) // prints 'A'
+log(ringBuffer.shift()) // pulls 'A' off front and prints 'A'
 log(ringBuffer.length) // prints 2
-log([...ringBuffer]) // prints ['A', 'B']
+log([...ringBuffer]) // prints ['B', 'C']
 log(ringBuffer.length) // prints 2
 ```
 
@@ -52,7 +59,8 @@ Contributions are welcome. Please create a pull request.
 * Package verification requires [pnpm](https://pnpm.io/) to be installed globally.
   * `npm install -g pnpm`
   * `pnpm install`
-  * `pnpm run check:packfile` to test against Node ES and CommonJS projects, as well as Electron.
+  * `pnpm test` to run unit tests
+  * `pnpm run check:packfile` to test the pack file against Node ES and CommonJS projects, as well as Electron.
   * `pnpm run check` to validate the package is ready for commit
 
 ## Issues
