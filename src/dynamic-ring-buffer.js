@@ -13,22 +13,25 @@ import { RingBuffer } from '@toolbuilder/ring-buffer'
  * DynamicRingBuffer allocates and deallocates internal buffers as the length increases
  * and decreases to tolerate rare bursts of data, while using memory frugally when data
  * flows slow.
+ * @template Type
  */
 export class DynamicRingBuffer {
   /**
    * Constructs a DynamicRingBuffer with fixed maximum capacity.
-   * @param {Number} chunkSize - buffer will grow and shrink in chunkSize increments
-   * @param {Number} capacity - maximum number of values in the buffer
+   * @param {number} chunkSize - buffer will grow and shrink in chunkSize increments
+   * @param {number} capacity - maximum number of values in the buffer
    */
   constructor (chunkSize = 100, capacity = Number.MAX_SAFE_INTEGER) {
     this.chunkSize = chunkSize
     this.capacity = capacity
+    /** @type List<Type> */
     this._buffers = List.from() // empty doubly linked list of RingBuffers
     this.length = 0
   }
 
   /**
    * Empties the ring buffer.
+   * @returns {void}
    */
   clear () {
     this._buffers = List.from()
@@ -37,7 +40,7 @@ export class DynamicRingBuffer {
 
   /**
    * Returns the value at the back of the buffer.
-   * @returns {any} - the back of the buffer, or `undefined` if empty
+   * @returns {Type} - the back of the buffer, or `undefined` if empty
    */
   back () {
     if (this.length === 0) return undefined
@@ -46,7 +49,7 @@ export class DynamicRingBuffer {
 
   /**
    * Returns the value at the front of the buffer.
-   * @returns {any} - the front of the buffer, or `undefined` if empty
+   * @returns {Type} - the front of the buffer, or `undefined` if empty
    */
   front () {
     if (this.length === 0) return undefined
@@ -56,8 +59,8 @@ export class DynamicRingBuffer {
   /**
    * Pushes a value onto the back of the buffer. If length === capacity,
    * the value at the front of the buffer is discarded.
-   * @param {any} value - value to push
-   * @returns {Number} - current length of buffer
+   * @param {Type} value - value to push
+   * @returns {number} - current length of buffer
    */
   push (value) {
     if (this.length === this.capacity) this.shift()
@@ -76,7 +79,7 @@ export class DynamicRingBuffer {
    * Removes a value from the back of the buffer and returns it. The
    * newly empty buffer location is set to undefined to release any
    * object references.
-   * @returns {any} the value removed from the back of the buffer
+   * @returns {Type} the value removed from the back of the buffer
    * or `undefined` if empty.
    */
   pop () {
@@ -91,7 +94,7 @@ export class DynamicRingBuffer {
    * Removes a value from the front of the buffer and returns it. The
    * newly empty buffer location is set to undefined to release any
    * object references.
-   * @returns {any} the value removed from the front of the buffer
+   * @returns {Type} the value removed from the front of the buffer
    * or `undefined` if empty.
    */
   shift () {
@@ -105,8 +108,8 @@ export class DynamicRingBuffer {
   /**
    * Pushes a value on the front of the buffer. If length === capacity,
    * the value at the back is discarded.
-   * @param {any} value - to push onto the front
-   * @returns {Number} - current length of buffer
+   * @param {Type} value - to push onto the front
+   * @returns {number} - current length of buffer
    */
   unshift (value) {
     if (this.length === this.capacity) this.pop()
@@ -123,7 +126,7 @@ export class DynamicRingBuffer {
 
   /**
    * Iterator that goes from front to back.
-   * @returns {Generator} - iterates from front to back
+   * @returns {IterableIterator<Type>} - iterates from front to back
    */
   * [Symbol.iterator] () {
     for (const buffer of this._buffers) {

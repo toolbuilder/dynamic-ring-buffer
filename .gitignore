@@ -1,3 +1,5 @@
 node_modules/
 cjs/*.js
 *.tgz
+*.d.ts
+*.d.ts.map
